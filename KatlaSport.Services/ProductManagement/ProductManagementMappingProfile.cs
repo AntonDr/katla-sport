@@ -5,6 +5,7 @@ using DataAccessProductCategory = KatlaSport.DataAccess.ProductCatalogue.Product
 
 namespace KatlaSport.Services.ProductManagement
 {
+    /// <inheritdoc />
     public sealed class ProductManagementMappingProfile : Profile
     {
         public ProductManagementMappingProfile()
@@ -13,8 +14,9 @@ namespace KatlaSport.Services.ProductManagement
             CreateMap<DataAccessProductCategory, ProductCategoryListItem>();
             CreateMap<DataAccessProduct, ProductCategoryProductListItem>();
 
-            // TODO STEP 2 - Change the mapping below.
-            CreateMap<DataAccessProduct, Product>();
+            CreateMap<DataAccessProduct, Product>()
+                .ForMember(li => li.Description, opt => opt.MapFrom(p => p.Description ?? string.Empty))
+                .ForMember(li => li.ManufacturerCode, opt => opt.MapFrom(p => p.ManufacturerCode ?? string.Empty));
 
             CreateMap<DataAccessProduct, ProductListItem>()
                 .ForMember(li => li.CategoryCode, opt => opt.MapFrom(p => p.Category.Code));
