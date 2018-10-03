@@ -34,7 +34,7 @@ namespace KatlaSport.Services.HiveManagement
             var dbHives = await _context.Hives.OrderBy(h => h.Id).ToArrayAsync();
             var hives = dbHives.Select(h => Mapper.Map<HiveListItem>(h)).ToList();
 
-            foreach (HiveListItem hive in hives)
+            foreach (var hive in hives)
             {
                 hive.HiveSectionCount = _context.Sections.Count(s => s.StoreHiveId == hive.Id);
             }
@@ -110,7 +110,6 @@ namespace KatlaSport.Services.HiveManagement
             }
 
             var dbHive = dbHives[0];
-
             if (dbHive.IsDeleted == false)
             {
                 throw new RequestedResourceHasConflictException();
@@ -123,7 +122,21 @@ namespace KatlaSport.Services.HiveManagement
         /// <inheritdoc/>
         public async Task SetStatusAsync(int hiveId, bool deletedStatus)
         {
-            throw new NotImplementedException();
+            var dbHives = await _context.Hives.Where(h => h.Id == hiveId).ToArrayAsync();
+
+            if (dbHives.Length == 0)
+            {
+                throw new RequestedResourceNotFoundException();
+            }
+
+            var dbHive = dbHives[0];
+            if (dbHive.IsDeleted != deletedStatus)
+            {
+                dbHive.IsDeleted = deletedStatus;
+                dbHive.LastUpdated = DateTime.UtcNow;
+                dbHive.LastUpdatedBy = _userContext.UserId;
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
