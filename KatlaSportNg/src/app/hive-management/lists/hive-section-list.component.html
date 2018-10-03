@@ -2,8 +2,24 @@
   <h2>Hive Sections for Hive</h2>
   <table class="table table-nonfluid">
     <thead>
+      <th scope="col">#</th>
+      <th scope="col">Code</th>
+      <th scope="col">Name</th>
+      <th scope="col">Deleted</th>
+      <th scope="col"></th>
     </thead>
     <tbody>
+      <tr *ngFor="let hiveSection of hiveSections">
+        <th scope="row">{{hiveSection.id}}</th>
+        <td>{{hiveSection.code}}</td>
+        <td>{{hiveSection.name}}</td>
+        <td>{{hiveSection.isDeleted}}</td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Edit group">
+            <button routerLink="/section/hive_section_id" type="button" class="btn btn-primary">Edit</button>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
   <div class="btn-toolbar" role="toolbar" aria-label="Action buttons">
