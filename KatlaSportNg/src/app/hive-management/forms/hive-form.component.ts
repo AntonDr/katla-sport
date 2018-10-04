@@ -8,6 +8,7 @@ import { Hive } from '../models/hive';
   templateUrl: './hive-form.component.html',
   styleUrls: ['./hive-form.component.css']
 })
+
 export class HiveFormComponent implements OnInit {
 
   hive = new Hive(0, "", "", "", false, "");

@@ -7,11 +7,12 @@ import { HiveService } from '../services/hive.service';
   templateUrl: './hive-list.component.html',
   styleUrls: ['./hive-list.component.css']
 })
+
 export class HiveListComponent implements OnInit {
 
-  hives: HiveListItem[];
+  hives: Array<HiveListItem>;
 
-  constructor(private hiveService: HiveService) { }
+  constructor(private hiveService: HiveService) {   }
 
   ngOnInit() {
     this.getHives();
@@ -27,5 +28,7 @@ export class HiveListComponent implements OnInit {
   }
 
   onRestore(hiveId: number) {
+    var hive = this.hives.find(h => h.id == hiveId);
+    this.hiveService.setHiveStatus(hiveId, false).subscribe(s => hive.isDeleted = false);
   }
 }
