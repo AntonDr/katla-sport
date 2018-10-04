@@ -28,7 +28,7 @@
       <label for="category" id="categoryLabel">Product Category</label>
       <select class="custom-select" [(ngModel)]="product.categoryId" id="category" aria-describedby="categoryLabel" #category="ngModel"
         [ngModelOptions]="{standalone: true}">
-        <option *ngFor="let category of productCategories" [ngValue]="category.id">{{category.name}}</option>
+        <option *ngFor="let category of productCategories" [ngValue]="categoryid">{{category.name}}</option>
       </select>
     </div>
     <div class="form-group">
