@@ -32,7 +32,8 @@ namespace KatlaSport.Services.HiveManagement
         public async Task<List<HiveListItem>> GetHivesAsync()
         {
             var dbHives = await _context.Hives.OrderBy(h => h.Id).ToArrayAsync();
-            var hives = dbHives.Select(h => Mapper.Map<HiveListItem>(h)).ToList();
+
+            var hives = dbHives.Select(Mapper.Map<HiveListItem>).ToList();
 
             foreach (var hive in hives)
             {

@@ -2,6 +2,7 @@
 namespace KatlaSport.DataAccess.Migrations
 {
     using System.CodeDom.Compiler;
+    using System.Data.Entity.Migrations;
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
@@ -12,7 +13,7 @@ namespace KatlaSport.DataAccess.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201810021942003_AddProductDescriptionManCodePrice"; }
+            get { return "201810091345038_AddProductDescriptionManCodePrice"; }
         }
         
         string IMigrationMetadata.Source
