@@ -52,7 +52,7 @@ namespace KatlaSport.Services.HiveManagement
         public async Task<List<HiveSectionListItem>> GetHiveSectionsAsync(int hiveId)
         {
             var dbHiveSections = await _context.Sections.Where(s => s.StoreHiveId == hiveId).OrderBy(s => s.Id).ToArrayAsync();
-            var hiveSections = dbHiveSections.Select(s => Mapper.Map<HiveSectionListItem>(s)).ToList();
+            var hiveSections = dbHiveSections.Select(Mapper.Map<HiveSectionListItem>).ToList();
             return hiveSections;
         }
 
